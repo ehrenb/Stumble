@@ -1,5 +1,7 @@
 androguard==3.0
 appdirs==1.4.0
+docopt==0.6.2
 packaging==16.8
 pyparsing==2.1.10
+python-magic==0.4.12
 six==1.10.0
