@@ -27,34 +27,38 @@ class ApkFileSearch(object):
         self.patterns = [re.compile(search_string, flags=flags) for search_string in search_strings]
 
     def search(self):
+        """iterate through files in the APK and apply search_strings over files that are of type file_types
+            if no search strings specified, consider all files a match
+            if no file_types specified, apply search strings to all files
+            if no search strings and no file types, then return all files
+        """
         apk_files = self.apk.get_files_types()
         search_results = []
         for file_path, file_type in apk_files.iteritems():
             file_ext = os.path.splitext(os.path.basename(file_path))[1]
-            print file_ext
-            #if file_type option on, and this file is not that type, then skip
+
+            #if file type filter on, and this file is not that type, then skip
             if self.file_types and not any(interested_type in file_type.lower() or interested_type in file_ext for interested_type in self.file_types):
                 continue
 
             search_result = None
-
-           #record all files of specified file_type
-            if self.file_types and not self.search_strings:
-                search_result = {'file_path': file_path,
-                                           'file_type': file_type,
-                                           'search_string': None}
-                search_results.append(search_result)
-
             file_data = self.apk.get_file(file_path)
 
-            for pattern in self.patterns:
-                    match = pattern.search(file_data)
-                    if match:
-                        search_result = {'file_path': file_path,
-                                                 'file_type': file_type,
-                                                 'search_string': pattern.pattern}
-                        search_results.append(search_result)
+            if self.search_strings:
+                for pattern in self.patterns:
+                        match = pattern.search(file_data)
+                        if match:
+                            search_result = {'file_path': file_path,
+                                                      'file_type': file_type,
+                                                      'search_string': pattern.pattern}
+                            search_results.append(search_result)
+            else:
+                search_result = {'file_path': file_path,
+                                          'file_type': file_type,
+                                          'search_string': None}
+                search_results.append(search_result)
 
+            #write individual files
             if search_result and self.save_matched_files_dir:
                 #save original structure to avoid duplicate filename collisions
                 save_file_path = os.path.join(self.save_matched_files_dir, file_path)
