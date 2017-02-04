@@ -2,7 +2,7 @@ import os
 from pprint import pprint
 import re
 
-from androguard.core.bytecodes.apk import APK
+from androguard.core.bytecodes.apk import APK, AXMLPrinter
 import magic
 
 class ApkFileSearch(object):
@@ -67,5 +67,12 @@ class ApkFileSearch(object):
 
                 with open(save_file_path,'wb') as f:
                     f.write(file_data)
+
+                if 'Android binary XML' in file_type:
+                    with open(save_file_path,'r+') as axml_f:
+                        decoded_axml = AXMLPrinter(axml_f.read()).buff
+                        axml_f.seek(0)
+                        axml_f.write(decoded_axml)
+                        axml_f.truncate()
 
         return search_results
