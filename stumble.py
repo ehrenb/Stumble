@@ -14,7 +14,6 @@ Arguments:
   OUT_DIR Save file(s) matched, if no FILE_TYPES specified, then save ALL files
 
 Options:
-  APK_PATHS              The APK path(s) you want to search
   -s SEARCH_STRING  The search string(s) you want to look for
   -f FILE_TYPES           Specify the types of file extensions you want to search (.xml, .txt, etc...)
   -i --insensitive          Make search string case insensitive

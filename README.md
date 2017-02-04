@@ -27,10 +27,19 @@ Options:
   
 # Examples:
 Extract all files whose data matches a regular expression 'http://' or 'android' into a directory 'output':
-  python stumble.py banking_malware.apk -s http:// -s android -w output
-    
+
+```
+python stumble.py banking_malware.apk -s http:// -s android -w output
+```
+
 Extract only JSON and XML files whose data matches a regular expression 'http://' into a directory 'output'
-  python stumble.py banking_malware.apk -f json -f xml -s http:// -s android -w output
-    
+
+```
+python stumble.py banking_malware.apk -f json -f xml -s http:// -s android -w output
+```
+
 Extract all files to a directory 'output':
-  python stumble.py banking_malware.apk -w output
+
+```
+python stumble.py banking_malware.apk -w output
+```
