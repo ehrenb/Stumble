@@ -1,5 +1,5 @@
 # Stumble
-Stumble is a small command-line tool for searching and extracting static files packaged inside of APKs.  
+Stumble is a small command-line tool for searching and extracting static resource files packaged inside of APKs.  Note, that this does not search and extract source code or disassembly
 
 ```
 Usage:
@@ -43,3 +43,7 @@ Extract all files to a directory 'output':
 ```
 python stumble.py banking_malware.apk -w output
 ```
+
+
+## Future Ideas
+Source code parsing ()
